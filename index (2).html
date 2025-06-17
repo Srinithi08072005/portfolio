@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal Portfolio - Purple Theme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #1c0536;
+      color: #e0dbf7;
+      line-height: 1.6;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    a {
+      color: #a05aff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #d3bfff;
+      outline: none;
+    }
+    h1, h2, h3, h4 {
+      margin-top: 0;
+      font-weight: 700;
+      color: #c8baff;
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 16px;
+      color: #ccc6ff;
+    }
+    /* Layout containers */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+    section {
+      margin-bottom: 64px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #3b2673;
+    }
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #6a39d3, #a16eff);
+      padding: 12px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgb(69 36 167 / 0.6);
+    }
+    nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #f3f1ff;
+      letter-spacing: 2px;
+      user-select: none;
+      font-family: 'Poppins', sans-serif;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 0;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: #d3bfff;
+      left: 0;
+      bottom: 0;
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus::after {
+      width: 100%;
+    }
+    /* Main sections */
+    /* About Me */
+    #about {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    #about .about-text {
+      flex: 1 1 320px;
+      min-width: 280px;
+    }
+    #about .about-image {
+      flex: 0 0 150px;
+      max-width: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 8px 20px #6a39d3aa;
+      user-select: none;
+    }
+    #about img {
+      width: 100%;
+      display: block;
+      border-radius: inherit;
+      object-fit: cover;
+    }
+    /* Skills */
+    #skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .skill {
+      background: #381d81;
+      padding: 10px 15px;
+      border-radius: 12px;
+      color: #d7cef8;
+      font-weight: 600;
+    }
+    /* Certification */
+    #certification .cert-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .cert-card {
+      background: #381d81;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 5px 15px rgba(106, 57, 211, 0.5);
+      color: #d7cef8;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .cert-card:hover, .cert-card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 32px rgba(106, 57, 211, 0.8);
+      outline: none;
+    }
+    .cert-title a {
+      color: #cdb9ff;
+      text-decoration: underline;
+    }
+    .cert-title a:hover,
+    .cert-title a:focus {
+      color: #d3bfff;
+      outline: none;
+    }
+    .cert-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 1.2rem;
+    }
+    .cert-issuer {
+      font-style: italic;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: #a59ae1;
+    }
+    .cert-date {
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+    /* Projects */
+    #projects .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .project-card {
+      background: #361f84;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(101, 61, 211, 0.5);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover, .project-card:focus-within {
+      box-shadow: 0 15px 38px rgba(101, 61, 211, 0.8);
+      outline: none;
+      transform: translateY(-8px);
+    }
+    .project-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #4e3acc;
+    }
+    .project-content {
+      padding: 20px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-title {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: #d1c9ff;
+    }
+    .project-description {
+      flex: 1 1 auto;
+      font-size: 0.95rem;
+      color: #b4aef0;
+      margin-bottom: 12px;
+    }
+    .project-link {
+      text-align: right;
+    }
+    .project-link a {
+      font-weight: 600;
+      color: #ab8aff;
+      text-decoration: underline;
+    }
+    .project-link a:hover,
+    .project-link a:focus {
+      color: #d1c9ff;
+    }
+    /* Contact */
+    #contact .contact-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      justify-content: space-between;
+    }
+    #contact .contact-info {
+      flex: 1 1 320px;
+      min-width: 280px;
+      color: #cbc2ff;
+      white-space: pre-line;
+    }
+    #contact h3 {
+      margin-top: 0;
+      color: #d3d0ff;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 1rem;
+      user-select: none;
+    }
+    .material-icons.contact-icon {
+      font-size: 28px;
+      color: #ad86ff;
+      flex-shrink: 0;
+    }
+    form.contact-form {
+      flex: 1 1 320px;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .form-input,
+    .form-textarea {
+      background: #2a0e65;
+      border: none;
+      border-radius: 12px;
+      color: #c8baff;
+      padding: 14px 20px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      resize: vertical;
+      font-family: inherit;
+    }
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: 2px solid #a583ff;
+      background: #422ba6;
+    }
+    button.submit-btn {
+      background: linear-gradient(135deg, #6a39d3, #a16eff);
+      border: none;
+      color: white;
+      padding: 16px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+    button.submit-btn:hover,
+    button.submit-btn:focus {
+      box-shadow: 0 10px 30px #b395ffcc;
+      transform: translateY(-3px);
+      outline: none;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      #about {
+        flex-direction: column;
+      }
+      #contact .contact-content {
+        flex-direction: column;
+      }
+      .nav-links {
+        gap: 16px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <nav aria-label="Primary navigation">
+      <div class="logo" tabindex="0">My Portfolio</div>
+      <ul class="nav-links">
+        <li><a href="#about" tabindex="0">About Me</a></li>
+        <li><a href="#skills" tabindex="0">Skills</a></li>
+        <li><a href="#certification" tabindex="0">Certification</a></li>
+        <li><a href="#projects" tabindex="0">Project</a></li>
+        <li><a href="#contact" tabindex="0">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="about" tabindex="-1" aria-labelledby="about-title" role="region">
+      <div class="container">
+        <h2 id="about-title">About Me</h2>
+        <div class="about-image" aria-label="Portrait of the portfolio owner">
+          <img
+            src="sri.jpg"
+            alt="Portrait of a young professional with a purple-themed background"
+            loading="lazy"
+            width="150"
+            height="150"
+          />
+        </div>
+        <div class="about-text">
+          <p>Hello! I'm Srinithi Ayappan, an enthusiastic and creative undergraduate student pursuing a Bachelor's degree in Computer Science and Design at Sona College of Technology, with a strong passion for UI/UX design. Skilled in creating user-centered interfaces through wireframing, prototyping, and usability testing using tools like Figma and Adobe XD. Eager to contribute to a collaborative design team and gain hands-on experience in crafting intuitive and engaging digital experiences.</p>
+        </div>
+      </div>
+    </section>
+    <section id="skills" tabindex="-1" aria-labelledby="skills-title" role="region">
+      <div class="container">
+        <h2 id="skills-title">Skills</h2>
+        <div id="skills">
+          <div class="skill">Figma</div>
+          <div class="skill">Adobe Photoshop</div>
+          <div class="skill">Blender</div>
+          <div class="skill">Python</div>
+          <div class="skill">Java</div>
+          <div class="skill">C Programming</div>
+          <div class="skill">Design Thinking</div>
+        </div>
+      </div>
+    </section>
+    <section id="certification" tabindex="-1" aria-labelledby="certification-title" role="region">
+      <div class="container">
+        <h2 id="certification-title">Certification</h2>
+        <div class="cert-list">
+          <article class="cert-card" tabindex="0" aria-label="Become a Generative AI Trailblazer in just 30 mins">
+            <h3 class="cert-title"><a href="https://www.linkedin.com/posts/srinithi-ayappan-a15a89326_generativeai-aiin30minutes-upskilling-activity-7330856313217835008-UrKl?utm_source=share&utm_medium=member_android&rcm=ACoAAFJionEB3zCp47spVGcajjeBw3wPI2LZTj0" target="_blank" rel="noopener noreferrer">Become a Generative AI Trailblazer in just 30 mins</a></h3>
+            <p class="cert-issuer">Udemy</p>
+            <p class="cert-date">Issued: 2025</p>
+          </article>
+          <article class="cert-card" tabindex="0" aria-label="GenAI for UX Designers">
+            <h3 class="cert-title"><a href="https://www.linkedin.com/posts/srinithi-ayappan-a15a89326_designthinking-nptel-iitmadras-activity-7331578935140376576-hCu6?utm_source=share&utm_medium=member_android&rcm=ACoAAFJionEB3zCp47spVGcajjeBw3wPI2LZTj0" target="_blank" rel="noopener noreferrer">GenAI for UX Designers</a></h3>
+            <p class="cert-issuer">Coursera</p>
+            <p class="cert-date">Issued: 2025</p>
+          </article>
+          <article class="cert-card" tabindex="0" aria-label="Digital Design in Photoshop">
+            <h3 class="cert-title"><a href="https://www.linkedin.com/posts/srinithi-ayappan-a15a89326_photoshop-digitaldesign-workshop-activity-7329816589791301632-WdaS?utm_source=share&utm_medium=member_android&rcm=ACoAAFJionEB3zCp47spVGcajjeBw3wPI2LZTj0" target="_blank" rel="noopener noreferrer">Digital Design in Photoshop</a></h3>
+            <p class="cert-issuer">EDITH</p>
+            <p class="cert-date">Issued: 2025</p>
+          </article>
+          <article class="cert-card" tabindex="0" aria-label="Design Thinking">
+            <h3 class="cert-title"><a href="https://www.linkedin.com/posts/srinithi-ayappan-a15a89326_designthinking-nptel-iitmadras-activity-7331578935140376576-hCu6?utm_source=share&utm_medium=member_android&rcm=ACoAAFJionEB3zCp47spVGcajjeBw3wPI2LZTj0" target="_blank" rel="noopener noreferrer">Design Thinking</a></h3>
+            <p class="cert-issuer">A Prime - NPTL</p>
+            <p class="cert-date">Issued: 2024</p>
+          </article>
+          <article class="cert-card" tabindex="0" aria-label="Industrial visit at AIRobosoft">
+            <h3 class="cert-title"><a href="https://www.linkedin.com/posts/srinithi-ayappan-a15a89326_industrialvisit-airobosoft-learningexperience-activity-7329372614768926720-7VVN?utm_source=share&utm_medium=member_android&rcm=ACoAAFJionEB3zCp47spVGcajjeBw3wPI2LZTj0" target="_blank" rel="noopener noreferrer">Industrial Visit at AIRobosoft</a></h3>
+            <p class="cert-issuer">AIRobosoft</p>
+            <p class="cert-date">Issued: 2024</p>
+          </article>
+          <article class="cert-card" tabindex="0" aria-label="Java Foundation certificate">
+            <h3 class="cert-title"><a href="https://www.linkedin.com/posts/srinithi-ayappan-a15a89326_certificationachieved-javaprogramming-infosysspringboard-activity-7273556720797298688-7G50?utm_source=share&utm_medium=member_android&rcm=ACoAAFJionEB3zCp47spVGcajjeBw3wPI2LZTj0" target="_blank" rel="noopener noreferrer">Java Foundation Certificate</a></h3>
+            <p class="cert-issuer">Infosys</p>
+            <p class="cert-date">Issued: 2024</p>
+          </article>
+          <article class="cert-card" tabindex="0" aria-label="Python Foundation certificate">
+            <h3 class="cert-title"><a href="https://www.linkedin.com/posts/srinithi-ayappan-a15a89326_python-certification-infosysspringboard-activity-7329780034678779904-203x?utm_source=share&utm_medium=member_android&rcm=ACoAAFJionEB3zCp47spVGcajjeBw3wPI2LZTj0" target="_blank" rel="noopener noreferrer">Python Foundation Certificate</a></h3>
+            <p class="cert-issuer">Infosys</p>
+            <p class="cert-date">Issued: 2024</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="projects" tabindex="-1" aria-labelledby="projects-title" role="region">
+      <div class="container">
+        <h2 id="projects-title">Project</h2>
+        <div class="projects-grid">
+          <article class="project-card" tabindex="0" aria-label="Project for a personal website built with HTML, CSS, and JavaScript">
+            <img
+              src="https://placehold.co/600x400/9b59b6/e0dbf7?text=Personal+Website"
+              alt="Screenshot placeholder of a personal website project showing a homepage with a purple accent theme"
+              loading="lazy"
+              class="project-image"
+              width="600"
+              height="400"
+            />
+            <div class="project-content">
+              <h3 class="project-title">Personal Website</h3>
+              <p class="project-description">A fully responsive personal website created with modern HTML, CSS, and JavaScript techniques.</p>
+              <div class="project-link">
+                <a href="#" aria-label="View details of Personal Website project" tabindex="0" target="_blank" rel="noopener noreferrer">View Details</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" tabindex="0" aria-label="Project for a to-do list web app with local storage">
+            <img
+              src="https://placehold.co/600x400/8e44ad/e0dbf7?text=ToDo+App"
+              alt="Screenshot placeholder of a to-do list web app project showing a list interface with checkboxes and purple accents"
+              loading="lazy"
+              class="project-image"
+              width="600"
+              height="400"
+            />
+            <div class="project-content">
+              <h3 class="project-title">To-Do List App</h3>
+              <p class="project-description">A clean and simple to-do list web application that saves tasks locally using localStorage.</p>
+              <div class="project-link">
+                <a href="#" aria-label="View details of To-Do List App project" tabindex="0" target="_blank" rel="noopener noreferrer">View Details</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" tabindex="0" aria-label="Project for a weather forecast app with API integration">
+            <img
+              src="https://placehold.co/600x400/7d3c98/e0dbf7?text=Weather+App"
+              alt="Screenshot placeholder of a weather forecast app project showing a weather dashboard with purple theme"
+              loading="lazy"
+              class="project-image"
+              width="600"
+              height="400"
+            />
+            <div class="project-content">
+              <h3 class="project-title">Weather Forecast App</h3>
+              <p class="project-description">A weather forecast web app using open weather APIs and dynamic data display with animations.</p>
+              <div class="project-link">
+                <a href="#" aria-label="View details of Weather Forecast App project" tabindex="0" target="_blank" rel="noopener noreferrer">View Details</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="contact" tabindex="-1" aria-labelledby="contact-title" role="region">
+      <div class="container">
+        <h2 id="contact-title">Contact Us</h2>
+        <div class="contact-content">
+          <div class="contact-info" aria-label="Contact information">
+            <h3>Get In Touch</h3>
+            <p>If you want to work together or have any questions, feel free to reach out.</p>
+            <div class="contact-item">
+              <span class="material-icons contact-icon" aria-hidden="true">phone</span>
+              <a href="tel:+918825917245" tabindex="0">8825917245</a>
+            </div>
+            <div class="contact-item">
+              <span class="material-icons contact-icon" aria-hidden="true">email</span>
+              <a href="mailto:srinithiayappan@gmail.com" tabindex="0">srinithiayappan@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <span class="material-icons contact-icon" aria-hidden="true">location_on</span>
+              <address>B1, Shri Vinayaga Apartment,
+              Palaniyappa Nagar,
+              Suramangalam,
+              Salem-636005</address>
+            </div>
+            <div class="contact-item">
+              <span class="material-icons contact-icon" aria-hidden="true">linkedin</span>
+              <a href="https://www.linkedin.com/in/srinithi-ayappan-a15a89326" target="_blank" rel="noopener noreferrer" tabindex="0">LinkedIn Profile</a>
+            </div>
+          </div>
+          <form class="contact-form" aria-label="Contact form" novalidate>
+            <input type="text" name="name" placeholder="Your Name" aria-label="Your name" required class="form-input" />
+            <input type="email" name="email" placeholder="Your Email" aria-label="Your email" required class="form-input" />
+            <textarea name="message" rows="5" placeholder="Your Message" aria-label="Your message" required class="form-textarea"></textarea>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Simple contact form validation and submission simulation
+    document.querySelector('.contact-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.name.value.trim() || !form.email.value.trim() || !form.message.value.trim()) {
+        alert('Please fill in all fields before submitting.');
+        return;
+      }
+      alert('Thank you for your message! I will get back to you soon.');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
